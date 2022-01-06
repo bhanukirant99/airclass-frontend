@@ -1,0 +1,155 @@
+.header{
+
+    display: flex;
+    flex-direction: row;
+  
+    background-color: rgb(255, 255, 255);
+    height: 76px;
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    box-shadow: rgb(31 45 61 / 15%) 0px 2px 2px 0px;
+   
+}
+.header-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    width: 94%;
+    margin-right: auto;
+    margin-left: auto;
+   
+}
+.header-logo{
+    width:80px;
+    object-fit: contain;
+   
+}
+.header-box{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.logo-search{
+    display:flex;
+    align-items:center;
+    width:40%;
+}
+.input {
+    height: 40px;
+    width: 100%;
+    border-radius: 8px;
+   
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color:black;
+    padding-left: 12px;
+    border: none;
+    outline:none;
+    background: #F0EFFF;
+  }
+  .searchbox {
+    display: flex;
+    align-items: center;
+    background-color: #F0EFFF;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    position: relative;
+    margin-right: 8px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    position: relative;
+   margin-left:60px;
+  }
+  .search-logo {
+      
+    text-align: center;
+    font-size:24px;
+    color:#8c86f8;
+    vertical-align:text-bottom;
+  }
+.msg-icon{
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height:44px;
+    margin-top: 4px;
+    margin-left: 4px;
+    
+
+}
+.home{
+    text-decoration:none;
+    color: rgb(56, 63, 72);
+    font-size: 16px;
+margin-left:4px;
+    font-weight:600;
+    letter-spacing: 1px;
+}
+.user-details-container {
+    display: flex;
+    margin-left:16px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .initial-container {
+      
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(27, 43, 80);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    
+    
+  }
+  .initial {
+    color: #FAFBFE;
+    font-size: 16px;
+    font-weight:bold;
+    letter-spacing: 1px;
+    
+  }
+  
+  .name {
+    
+    color: rgb(56, 63, 72);
+    font-size: 16px;
+    margin-right: 8px;
+
+    font-weight:600;
+    letter-spacing: 1px;
+  }
+  @media screen and (max-width: 1020px) {
+.header {
+    height: 60px;
+}
+  }
+  @media screen and (max-width: 768px) {
+  .name{
+      display:none;
+  }
+  .header-container{
+      width:90%;
+  }
+  .logo{
+      width:60px;
+  }
+  .searchbox{
+    height: 32px;   
+  }
+}
