@@ -24,7 +24,7 @@ function LoginPage() {
                 </NavLink>
               </p>
             </div>
-            <img src={loginImage} className="login" alt="login" />
+            <img src={loginImage} className="login-image" alt="login" />
           </div>
 
           <div className="login-part2">
