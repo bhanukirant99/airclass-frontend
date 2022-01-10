@@ -94,7 +94,9 @@ padding:0px;
     font-size:30px;
 }
 
-
+.nav-link{
+    width: 100%;
+}
 @media screen and (max-width: 768px) {
 .login-part1{
     visibility: hidden;
