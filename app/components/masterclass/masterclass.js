@@ -3,8 +3,8 @@ import React from 'react';
 import { BsPlayCircleFill } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 
-function Course(props) {
-  const { coursedetails, isenroll } = props;
+function Masterclass(props) {
+  const { coursedetails } = props;
   return (
     <div className="course-container">
       <div className="masterclass-image">
@@ -17,21 +17,16 @@ function Course(props) {
       </div>
 
       <div className="course-details">
-        <h1 className="course-title">{coursedetails['course-title']}</h1>
-        <p className="course-info">{coursedetails['course-info']}</p>
-
-        {isenroll && (
-          <button type="button" className="enroll">
-            enroll
-          </button>
-        )}
+        <h1 className="course-title">{coursedetails['masterclass-title']}</h1>
+        <p className="course-info">{coursedetails['masterclass-speaker']}</p>
+        <p className="course-info">{coursedetails['speaker-profession']}</p>
+        <p className="course-info">{coursedetails['speaker-college']}</p>
       </div>
     </div>
   );
 }
-Course.propTypes = {
-  coursedetails: PropTypes.array.isRequired,
-  isenroll: PropTypes.bool.isRequired,
+Masterclass.propTypes = {
+  coursedetails: PropTypes.object.isRequired,
 };
 
-export default Course;
+export default Masterclass;

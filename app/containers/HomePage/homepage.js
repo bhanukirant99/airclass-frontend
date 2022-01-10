@@ -5,27 +5,17 @@ import Course from 'components/course/course';
 import Masterclass from 'components/masterclass/masterclass';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 function Homepage() {
+  const courses = useSelector(state => state);
+  const { global } = courses;
   const isHome = false;
-  const isenroll = false;
-  const courseinfo = [
-    {
-      'course-title': 'Computer Programming',
-      'course-info':
-        'Learn how to ace coding competitions and become a great programmer',
-    },
-    {
-      'course-title': 'Computer Programming',
-      'course-info':
-        'Learn how to ace coding competitions and become a great programmer',
-    },
-    {
-      'course-title': 'Computer Programming',
-      'course-info':
-        'Learn how to ace coding competitions and become a great programmer',
-    },
-  ];
+
+  // const { masterclassinfo } = global;
+  const searchedallcoursesinfo = global.searchResultsallcourses;
+  const searchedenrolledcoursesinfo = global.searchResultsenrolledCourses;
+  const searchedmastercoursesinfo = global.searchResultsMasterClasses;
   return (
     <div className="page">
       <Header isHome={isHome} />
@@ -39,8 +29,8 @@ function Homepage() {
           </div>
           <div className="courses-display">
             <div className="courses-cards">
-              {courseinfo.map(eachItem => (
-                <Course coursedetails={eachItem} isenroll="true" />
+              {searchedallcoursesinfo.map(eachItem => (
+                <Course key={eachItem.id} coursedetails={eachItem} isenroll />
               ))}
             </div>
             <div className="arrow-container">
@@ -54,8 +44,12 @@ function Homepage() {
           </div>
           <div className="courses-display">
             <div className="courses-cards">
-              {courseinfo.map(eachItem => (
-                <Course coursedetails={eachItem} isenroll={isenroll} />
+              {searchedenrolledcoursesinfo.map(eachItem => (
+                <Course
+                  key={eachItem.id}
+                  coursedetails={eachItem}
+                  isenroll={false}
+                />
               ))}
             </div>
             <div className="arrow-container">
@@ -68,8 +62,8 @@ function Homepage() {
             </div>
           </div>
           <div className="masterclass-container">
-            {courseinfo.map(eachItem => (
-              <Masterclass coursedetails={eachItem} isenroll={isenroll} />
+            {searchedmastercoursesinfo.map(eachItem => (
+              <Masterclass key={eachItem.id} coursedetails={eachItem} />
             ))}
           </div>
         </div>

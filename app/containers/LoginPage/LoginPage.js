@@ -39,9 +39,12 @@ function LoginPage() {
               className="username"
               placeholder="Password"
             />
-            <button type="button" className="username login-btn">
-              Login
-            </button>
+            <NavLink className=" nav-link" to="/homepage">
+              <button type="button" className="username login-btn">
+                Login
+              </button>
+            </NavLink>
+
             <p className="continue-with">or continue with</p>
             <div className="login-icons">
               <BsFacebook className="facebook-icon" />
