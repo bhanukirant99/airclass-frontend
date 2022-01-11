@@ -1,21 +1,30 @@
-import './homepage.css';
-import Header from 'components/Header/header';
-import Footer from 'components/Footer/footer';
-import Course from 'components/course/course';
-import Masterclass from 'components/masterclass/masterclass';
+import './index.css';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import Course from 'components/Course';
+import Masterclass from 'components/Masterclass/';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-function Homepage() {
+function HomepageMentor() {
   const courses = useSelector(state => state);
   const { global } = courses;
   const isHome = false;
 
-  // const { masterclassinfo } = global;
   const searchedallcoursesinfo = global.searchResultsallcourses;
-  const searchedenrolledcoursesinfo = global.searchResultsenrolledCourses;
   const searchedmastercoursesinfo = global.searchResultsMasterClasses;
+  let noallresults = null;
+  let nomasterclassresults = null;
+  if (searchedallcoursesinfo.length === 0) {
+    noallresults = <h1 className="no-search-results">No results found</h1>;
+  }
+  if (searchedmastercoursesinfo.length === 0) {
+    nomasterclassresults = (
+      <h1 className="no-search-results">No results found</h1>
+    );
+  }
+
   return (
     <div className="page">
       <Header isHome={isHome} />
@@ -25,26 +34,15 @@ function Homepage() {
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Courses</h1>
+              <button id="enroll-btn" type="button" className="enroll">
+                Add Course
+              </button>
             </div>
           </div>
+          {noallresults}
           <div className="courses-display">
             <div className="courses-cards">
               {searchedallcoursesinfo.map(eachItem => (
-                <Course key={eachItem.id} coursedetails={eachItem} isenroll />
-              ))}
-            </div>
-            <div className="arrow-container">
-              <MdOutlineArrowForwardIos className="arrow" />
-            </div>
-          </div>
-          <div className="courses-container">
-            <div className="courses-box">
-              <h1 className="courses">Enrolled Courses</h1>
-            </div>
-          </div>
-          <div className="courses-display">
-            <div className="courses-cards">
-              {searchedenrolledcoursesinfo.map(eachItem => (
                 <Course
                   key={eachItem.id}
                   coursedetails={eachItem}
@@ -56,11 +54,13 @@ function Homepage() {
               <MdOutlineArrowForwardIos className="arrow" />
             </div>
           </div>
+
           <div className="courses-container">
             <div className="courses-box">
               <h1 className="courses">Masterclass Series</h1>
             </div>
           </div>
+          {nomasterclassresults}
           <div className="masterclass-container">
             {searchedmastercoursesinfo.map(eachItem => (
               <Masterclass key={eachItem.id} coursedetails={eachItem} />
@@ -72,4 +72,4 @@ function Homepage() {
     </div>
   );
 }
-export default Homepage;
+export default HomepageMentor;
