@@ -8,11 +8,12 @@
 
 import React from 'react';
 
-import HomePage from 'containers/HomePage/homepage';
-import LoginPage from 'containers/LoginPage/LoginPage';
-import SignupPage from 'containers/SignupPage/SignupPage';
+import HomePage from 'containers/HomePage';
+import LoginPage from 'containers/LoginPage';
+import SignupPage from 'containers/SignupPage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+// import HomepageMentor from 'containers/HomepageMentor';
 import configureStore from '../../configureStore';
 
 export default function App() {

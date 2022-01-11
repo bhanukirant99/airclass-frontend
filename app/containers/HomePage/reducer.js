@@ -1,5 +1,5 @@
 /*
- * HomeReducer
+ * AppReducer
  *
  * The reducer takes care of our data. Using actions, we can
  * update our application state. To add a new action,
@@ -8,91 +8,251 @@
  */
 
 import produce from 'immer';
-import { createStore } from 'redux';
-import { CHANGE_USERNAME } from './constants';
+// import { combineReducers } from 'redux';
 
 // The initial state of the App
 export const initialState = {
-  initialallcoursesinfo: [
+  initialAllCoursesInfo: [
     {
       id: 1,
-      'course-title': 'Artificial inteligence',
-      'course-info':
+      courseTitle: 'Artificial inteligence',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 2,
-      'course-title': 'Web development',
-      'course-info':
+      courseTitle: 'Web development',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
     {
       id: 3,
-      'course-title': 'Machine learning',
-      'course-info':
+      courseTitle: 'Machine learning',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
-      isenrolled: false,
+      isEnrolled: false,
     },
   ],
-  initialenrolledcourseinfo: [
+  initialEnrolledCourseInfo: [
     {
       id: 1,
-      'course-title': 'Computer Programming',
-      'course-info':
+      courseTitle: 'Computer Programming',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
     },
     {
       id: 2,
-      'course-title': 'Computer Programming nnnnnnnnnn',
-      'course-info':
+      courseTitle: 'Computer Programming nnnnnnnnnn',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer',
     },
     {
       id: 3,
-      'course-title': 'Computer Programming',
-      'course-info':
+      courseTitle: 'Computer Programming',
+      courseInfo:
         'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
     },
   ],
 
-  masterclassinfo: [
+  masterclassInfo: [
     {
-      'masterclass-title': 'Understanding 5G',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      id: 1,
+      masterclassTitle: 'Understanding 5G',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
-      'masterclass-title': 'Understanding 5G',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      id: 2,
+      masterclassTitle: 'Product Mindest',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
     {
-      'masterclass-title': 'Understanding 5G',
-      'masterclass-speaker': 'Rakesh Mishra',
-      'speaker-profession': 'Co-Founder Uhana',
-      'speaker-college': 'IIT Madras',
+      id: 3,
+      masterclassTitle: 'Coding',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
+    },
+  ],
+  searchResultsAllCourses: [
+    {
+      id: 1,
+      courseTitle: 'Artificial inteligence',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 2,
+      courseTitle: 'Web development',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+    {
+      id: 3,
+      courseTitle: 'Machine learning',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
+      isEnrolled: false,
+    },
+  ],
+  searchResultsEnrolledCourses: [
+    {
+      id: 1,
+      courseTitle: 'Computer Programming',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+    },
+    {
+      id: 2,
+      courseTitle: 'Computer Programming nnnnnnnnnn',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer',
+    },
+    {
+      id: 3,
+      courseTitle: 'Computer Programming',
+      courseInfo:
+        'Learn how to ace coding competitions and become a great programmer Learn how to ace coding competitions and become a great programmer',
+    },
+  ],
+  searchResultsMasterClasses: [
+    {
+      id: 1,
+      masterclassTitle: 'Understanding 5G',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
+    },
+    {
+      id: 2,
+      masterclassTitle: 'Product Mindest',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
+    },
+    {
+      id: 3,
+      masterclassTitle: 'Coding',
+      masterclassSpeaker: 'Rakesh Mishra',
+      speakerProfession: 'Co-Founder Uhana',
+      speakerCollege: 'IIT Madras',
     },
   ],
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const homeReducer = (state = initialState, action) =>
+/*
+const appReducer = (state = initialState.initialAllCoursesInfo, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case CHANGE_USERNAME:
-        // Delete prefixed '@' from the github username
-        draft.username = action.username.replace(/@/gi, '');
-        break;
+      case 'ENROLL_COURSE': {
+        return state.map(el => {
+          if (el.id === action.courseinfo.id) {
+            return { ...el, isenrolled: true };
+          }
+          return el;
+        });
+      }
+      case 'SEARCH_COURSE': {
+      }
     }
   });
 
-// const selectCount = state => state
-// export {selectCount, homeReducer};
+const enrolledReducer = (
+  state = initialState.initialEnrolledCourseInfo,
+  action
+) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case 'ENROLL_COURSE': {
+        const newcourse = {
+          id: state.length + 1,
+          courseTitle: action.courseinfo.courseTitle,
+          courseInfo: action.courseinfo.courseInfo,
+        };
+        return [...state, newcourse];
+      }
+    }
+  });
+const masterclassReducer = (state = initialState.masterclassInfo, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case '': {
+      }
+    }
+  });
+*/
+const wholeReducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      case 'ENROLL_COURSE':
+        {
+          const newAllCoursesInfo = state.initialAllCoursesInfo.map(el => {
+            if (el.id === action.courseinfo.id) {
+              return { ...el, isenrolled: true };
+            }
+            return el;
+          });
+          const newCourse = {
+            id: state.initialEnrolledCourseInfo.length + 1,
+            courseTitle: action.courseinfo.courseTitle,
+            courseInfo: action.courseinfo.courseInfo,
+          };
 
-const store = createStore(homeReducer);
+          const newEnrolledCoursesInfo = [
+            ...state.initialEnrolledCourseInfo,
+            newCourse,
+          ];
+          draft.initialAllCoursesInfo = newAllCoursesInfo;
+          draft.initialEnrolledCourseInfo = newEnrolledCoursesInfo;
+          draft.searchResultsAllCourses = newAllCoursesInfo;
+          draft.searchResultsEnrolledCourses = newEnrolledCoursesInfo;
+        }
+        break;
 
-export { store };
+      case 'SEARCH_COURSE': {
+        const searchedAllCourses = state.initialAllCoursesInfo.filter(
+          eachItem =>
+            eachItem.courseTitle
+              .toLowerCase()
+              .includes(action.searchinfo.toLowerCase()),
+        );
+        const searchedEnrolledCourses = state.initialEnrolledCourseInfo.filter(
+          eachItem =>
+            eachItem.courseTitle
+              .toLowerCase()
+              .includes(action.searchinfo.toLowerCase()),
+        );
+        const searchedMasterClassess = state.masterclassInfo.filter(eachItem =>
+          eachItem.masterclassTitle
+            .toLowerCase()
+            .includes(action.searchinfo.toLowerCase()),
+        );
+        /*
+        return {
+          ...state,
+          searchResultsAllCourses: searchedAllCourses,
+          searchResultsEnrolledCourses: searchedEnrolledCourses,
+        };
+        */
+        draft.searchResultsAllCourses = searchedAllCourses;
+        draft.searchResultsEnrolledCourses = searchedEnrolledCourses;
+        draft.searchResultsMasterClasses = searchedMasterClassess;
+      }
+    }
+  });
+/*
+const reducers = combineReducers({
+  initialAllCoursesInfo: appReducer,
+  initialEnrolledCourseInfo: enrolledReducer,
+  masterclassInfo: masterclassReducer,
+});
+*/
+export default wholeReducer;
